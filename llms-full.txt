@@ -251,12 +251,12 @@ const form = useForm<LoginFormValues>({ resolver: zodResolver(schema) })
 
 ### FormProvider
 
-| Prop      | Type                     | Default | Description                                         |
-| :-------- | :----------------------- | :------ | :--------------------------------------------------- |
-| methods   | `UseFormReturn<T>`       |         | The object returned by react-hook-form's `useForm()` |
-| onSubmit  | `() => void`             |         | Called with the validated values on submit           |
-| className | string                   |         | Additional CSS classes on the `<form>` element        |
-| children  | React.ReactNode          |         | The form's fields                                     |
+| Prop      | Type                     | Description                                         |
+| :-------- | :----------------------- | :--------------------------------------------------- |
+| methods   | `UseFormReturn<T>`       | The object returned by react-hook-form's `useForm()` |
+| onSubmit  | `() => void`             | Called with the validated values on submit           |
+| className | string                   | Additional CSS classes on the `<form>` element        |
+| children  | React.ReactNode          | The form's fields                                     |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -279,8 +279,6 @@ A single-line text input bound to a [form](/docs/form)'s `control`, with a label
   filePath="app/docs/form-input/form-input-basic.tsx"
   classNameComponentContainer="p-8"
 />
-
-A label ending in `*` renders the asterisk in the destructive color to flag a required field — no extra prop needed.
 
 ## Installation
 
@@ -320,16 +318,16 @@ A label ending in `*` renders the asterisk in the destructive color to flag a re
 
 ### FormInput
 
-| Prop           | Type                | Default | Description                                    |
-| :------------- | :------------------ | :------ | :---------------------------------------------- |
-| control         | `Control<T>`         |         | The `control` object from `useForm()`            |
-| name            | `FieldPath<T>`       |         | The field name, type-checked against `T`         |
-| label           | string               |         | Field label; a trailing `*` marks it required    |
-| description     | string               |         | Helper text below the input                      |
-| Icon            | React.ReactNode      |         | Leading icon                                     |
-| inputClassName  | string               |         | Additional CSS classes on the `<input>`          |
-| className       | string               |         | Additional CSS classes on the field wrapper       |
-| ...props        | `React.InputHTMLAttributes<HTMLInputElement>` |  | All other native input props (`type`, `placeholder`, ...) |
+| Prop           | Type                | Description                                    |
+| :------------- | :------------------ | :---------------------------------------------- |
+| control         | `Control<T>`         | The `control` object from `useForm()`            |
+| name            | `FieldPath<T>`       | The field name, type-checked against `T`         |
+| label           | string               | Field label                                       |
+| description     | string               | Helper text below the input                      |
+| Icon            | React.ReactNode      | Leading icon                                     |
+| inputClassName  | string               | Additional CSS classes on the `<input>`          |
+| className       | string               | Additional CSS classes on the field wrapper       |
+| ...props        | `React.InputHTMLAttributes<HTMLInputElement>` | All other native input props (`type`, `placeholder`, ...) |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -391,15 +389,15 @@ A password input built on [Form Input](/docs/form-input)'s chrome, with a built-
 
 ### FormPassword
 
-| Prop           | Type                | Default | Description                                 |
-| :------------- | :------------------ | :------ | :-------------------------------------------- |
-| control         | `Control<T>`         |         | The `control` object from `useForm()`          |
-| name            | `FieldPath<T>`       |         | The field name, type-checked against `T`       |
-| label           | string               |         | Field label                                    |
-| description     | string               |         | Helper text below the input                    |
-| Icon            | React.ReactNode      |         | Leading icon                                   |
-| inputClassName  | string               |         | Additional CSS classes on the `<input>`        |
-| className       | string               |         | Additional CSS classes on the field wrapper     |
+| Prop           | Type                | Description                                 |
+| :------------- | :------------------ | :-------------------------------------------- |
+| control         | `Control<T>`         | The `control` object from `useForm()`          |
+| name            | `FieldPath<T>`       | The field name, type-checked against `T`       |
+| label           | string               | Field label                                    |
+| description     | string               | Helper text below the input                    |
+| Icon            | React.ReactNode      | Leading icon                                   |
+| inputClassName  | string               | Additional CSS classes on the `<input>`        |
+| className       | string               | Additional CSS classes on the field wrapper     |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -461,15 +459,15 @@ A multi-line text input bound to a [form](/docs/form)'s `control`, for longer fr
 
 ### FormTextarea
 
-| Prop               | Type                | Default | Description                                 |
-| :------------------ | :------------------ | :------ | :-------------------------------------------- |
-| control              | `Control<T>`         |         | The `control` object from `useForm()`          |
-| name                 | `FieldPath<T>`       |         | The field name, type-checked against `T`       |
-| label                | string               |         | Field label; a trailing `*` marks it required  |
-| description          | string               |         | Helper text below the textarea                 |
-| Icon                 | React.ReactNode      |         | Leading icon                                   |
-| textareaClassName    | string               |         | Additional CSS classes on the `<textarea>`     |
-| className            | string               |         | Additional CSS classes on the field wrapper     |
+| Prop               | Type                | Description                                 |
+| :------------------ | :------------------ | :-------------------------------------------- |
+| control              | `Control<T>`         | The `control` object from `useForm()`          |
+| name                 | `FieldPath<T>`       | The field name, type-checked against `T`       |
+| label                | string               | Field label                                     |
+| description          | string               | Helper text below the textarea                 |
+| Icon                 | React.ReactNode      | Leading icon                                   |
+| textareaClassName    | string               | Additional CSS classes on the `<textarea>`     |
+| className            | string               | Additional CSS classes on the field wrapper     |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -531,18 +529,17 @@ A single-choice dropdown bound to a [form](/docs/form)'s `control`, backed by [S
 
 ### FormSelect
 
-| Prop              | Type                                       | Default | Description                              |
-| :----------------- | :------------------------------------------ | :------ | :------------------------------------------ |
-| control             | `Control<T>`                                |         | The `control` object from `useForm()`        |
-| name                | `FieldPath<T>`                              |         | The field name, type-checked against `T`     |
-| label               | string                                       |         | Field label                                  |
-| required            | boolean                                      |         | Shows a destructive-colored asterisk          |
-| icon                | React.ReactNode                              |         | Icon rendered next to the label               |
-| placeholder         | string                                       |         | Placeholder shown when no option is selected  |
-| options             | `{ value: string; label: React.ReactNode }[]` |         | The selectable options                        |
-| disabled            | boolean                                      |         | Disables the select                           |
-| className           | string                                       |         | Additional CSS classes on the trigger          |
-| formItemClassName   | string                                       |         | Additional CSS classes on the field wrapper    |
+| Prop              | Type                                       | Description                              |
+| :----------------- | :------------------------------------------ | :------------------------------------------ |
+| control             | `Control<T>`                                | The `control` object from `useForm()`        |
+| name                | `FieldPath<T>`                              | The field name, type-checked against `T`     |
+| label               | string                                       | Field label                                  |
+| icon                | React.ReactNode                              | Icon rendered next to the label               |
+| placeholder         | string                                       | Placeholder shown when no option is selected  |
+| options             | `{ value: string; label: React.ReactNode }[]` | The selectable options                        |
+| disabled            | boolean                                      | Disables the select                           |
+| className           | string                                       | Additional CSS classes on the trigger          |
+| formItemClassName   | string                                       | Additional CSS classes on the field wrapper    |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -604,13 +601,13 @@ A single boolean toggle, checkbox style, bound to a [form](/docs/form)'s `contro
 
 ### FormCheckbox
 
-| Prop      | Type            | Default | Description                             |
-| :-------- | :--------------- | :------ | :----------------------------------------- |
-| control    | `Control<T>`      |         | The `control` object from `useForm()`       |
-| name       | `FieldPath<T>`    |         | The field name, type-checked against `T`    |
-| label      | string            |         | Label rendered next to the checkbox          |
-| disabled   | boolean           |         | Disables the checkbox                        |
-| className  | string            |         | Additional CSS classes on the field wrapper   |
+| Prop      | Type            | Description                             |
+| :-------- | :--------------- | :----------------------------------------- |
+| control    | `Control<T>`      | The `control` object from `useForm()`       |
+| name       | `FieldPath<T>`    | The field name, type-checked against `T`    |
+| label      | string            | Label rendered next to the checkbox          |
+| disabled   | boolean           | Disables the checkbox                        |
+| className  | string            | Additional CSS classes on the field wrapper   |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -672,13 +669,13 @@ A single boolean toggle, switch style, bound to a [form](/docs/form)'s `control`
 
 ### FormSwitch
 
-| Prop        | Type            | Default | Description                          |
-| :----------- | :--------------- | :------ | :--------------------------------------- |
-| control       | `Control<T>`      |         | The `control` object from `useForm()`     |
-| name          | `FieldPath<T>`    |         | The field name, type-checked against `T`  |
-| label         | string            |         | Field label                               |
-| description   | string            |         | Helper text below the label                |
-| className     | string            |         | Additional CSS classes on the switch itself |
+| Prop        | Type            | Description                          |
+| :----------- | :--------------- | :--------------------------------------- |
+| control       | `Control<T>`      | The `control` object from `useForm()`     |
+| name          | `FieldPath<T>`    | The field name, type-checked against `T`  |
+| label         | string            | Field label                               |
+| description   | string            | Helper text below the label                |
+| className     | string            | Additional CSS classes on the switch itself |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -744,17 +741,17 @@ A text input for `YYYY-MM-DD` dates with a calendar popover, bound to a [form](/
 
 ### FormDatePicker
 
-| Prop            | Type            | Default | Description                                   |
-| :--------------- | :--------------- | :------ | :------------------------------------------------ |
-| control           | `Control<T>`      |         | The `control` object from `useForm()`              |
-| name              | `FieldPath<T>`    |         | The field name, type-checked against `T`           |
-| label             | string            |         | Field label                                        |
-| description       | string            |         | Helper text below the input                        |
-| placeholder       | string            |         | Placeholder text                                    |
-| fromDate          | Date              |         | Earliest selectable date                            |
-| toDate            | Date              |         | Latest selectable date                              |
-| inputClassName    | string            |         | Additional CSS classes on the `<input>`             |
-| className         | string            |         | Additional CSS classes on the field wrapper          |
+| Prop            | Type            | Description                                   |
+| :--------------- | :--------------- | :------------------------------------------------ |
+| control           | `Control<T>`      | The `control` object from `useForm()`              |
+| name              | `FieldPath<T>`    | The field name, type-checked against `T`           |
+| label             | string            | Field label                                        |
+| description       | string            | Helper text below the input                        |
+| placeholder       | string            | Placeholder text                                    |
+| fromDate          | Date              | Earliest selectable date                            |
+| toDate            | Date              | Latest selectable date                              |
+| inputClassName    | string            | Additional CSS classes on the `<input>`             |
+| className         | string            | Additional CSS classes on the field wrapper          |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -816,19 +813,19 @@ A numeric input with increment/decrement buttons, bound to a [form](/docs/form)'
 
 ### FormNumberField
 
-| Prop            | Type            | Default | Description                                |
-| :--------------- | :--------------- | :------ | :---------------------------------------------- |
-| control           | `Control<T>`      |         | The `control` object from `useForm()`            |
-| name              | `FieldPath<T>`    |         | The field name, type-checked against `T`         |
-| label             | string            |         | Field label; a trailing `*` marks it required    |
-| description       | string            |         | Helper text below the input                      |
-| Icon              | React.ReactNode   |         | Leading icon                                     |
-| showButtons       | boolean           | true    | Whether to show the increment/decrement buttons   |
-| min               | number            |         | Minimum allowed value                             |
-| max               | number            |         | Maximum allowed value                             |
-| step              | number \| string  |         | Increment step                                    |
-| inputClassName    | string            |         | Additional CSS classes on the number input        |
-| className         | string            |         | Additional CSS classes on the field wrapper        |
+| Prop            | Type            | Description                                |
+| :--------------- | :--------------- | :---------------------------------------------- |
+| control           | `Control<T>`      | The `control` object from `useForm()`            |
+| name              | `FieldPath<T>`    | The field name, type-checked against `T`         |
+| label             | string            | Field label                                       |
+| description       | string            | Helper text below the input                      |
+| Icon              | React.ReactNode   | Leading icon                                     |
+| showButtons       | boolean           | Whether to show the increment/decrement buttons (default: `true`) |
+| min               | number            | Minimum allowed value                             |
+| max               | number            | Maximum allowed value                             |
+| step              | number \| string  | Increment step                                    |
+| inputClassName    | string            | Additional CSS classes on the number input        |
+| className         | string            | Additional CSS classes on the field wrapper        |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -894,14 +891,14 @@ A phone number input with a searchable country selector, bound to a [form](/docs
 
 ### FormPhoneNumber
 
-| Prop               | Type            | Default | Description                             |
-| :------------------ | :--------------- | :------ | :------------------------------------------ |
-| control              | `Control<T>`      |         | The `control` object from `useForm()`        |
-| name                 | `FieldPath<T>`    |         | The field name, type-checked against `T`     |
-| label                | string            |         | Field label                                  |
-| placeholder          | string            |         | Placeholder text                             |
-| disabled             | boolean           |         | Disables the input                           |
-| formItemClassName    | string            |         | Additional CSS classes on the field wrapper   |
+| Prop               | Type            | Description                             |
+| :------------------ | :--------------- | :------------------------------------------ |
+| control              | `Control<T>`      | The `control` object from `useForm()`        |
+| name                 | `FieldPath<T>`    | The field name, type-checked against `T`     |
+| label                | string            | Field label                                  |
+| placeholder          | string            | Placeholder text                             |
+| disabled             | boolean           | Disables the input                           |
+| formItemClassName    | string            | Additional CSS classes on the field wrapper   |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -963,15 +960,15 @@ A drag-and-drop file upload bound to a [form](/docs/form)'s `control`. Supports 
 
 ### FormFileInput
 
-| Prop        | Type            | Default | Description                                    |
-| :----------- | :--------------- | :------ | :-------------------------------------------------- |
-| control       | `Control<T>`      |         | The `control` object from `useForm()`                |
-| name          | `FieldPath<T>`    |         | The field name, type-checked against `T`             |
-| label         | string            |         | Field label                                          |
-| description   | string            |         | Helper text below the drop zone                       |
-| accept        | string            |         | Accepted file extensions/MIME types                   |
-| multiple      | boolean           | false   | Whether more than one file can be selected             |
-| className     | string            |         | Additional CSS classes on the field wrapper            |
+| Prop        | Type            | Description                                    |
+| :----------- | :--------------- | :-------------------------------------------------- |
+| control       | `Control<T>`      | The `control` object from `useForm()`                |
+| name          | `FieldPath<T>`    | The field name, type-checked against `T`             |
+| label         | string            | Field label                                          |
+| description   | string            | Helper text below the drop zone                       |
+| accept        | string            | Accepted file extensions/MIME types                   |
+| multiple      | boolean           | Whether more than one file can be selected (default: `false`) |
+| className     | string            | Additional CSS classes on the field wrapper            |
 
 
 import ComponentCodePreview from "@/components/app/component-code-preview"
@@ -1033,15 +1030,15 @@ A repeatable list of text inputs, backed by react-hook-form's [`useFieldArray`](
 
 ### FormArrayField
 
-| Prop            | Type            | Default      | Description                              |
-| :--------------- | :--------------- | :------------ | :-------------------------------------------- |
-| control            | `Control<T>`      |               | The `control` object from `useForm()`          |
-| name               | `FieldPath<T>`    |               | The array field's name, type-checked against `T` |
-| label              | string            |               | Field label; a trailing `*` marks it required  |
-| description        | string            |               | Helper text below the list                      |
-| placeholder        | string            | "Enter item"  | Placeholder for each item's input                |
-| addButtonLabel     | string            | "Add Item"    | Label for the add-item button                    |
-| className          | string            |               | Additional CSS classes on the field wrapper       |
+| Prop            | Type            | Description                              |
+| :--------------- | :--------------- | :-------------------------------------------- |
+| control            | `Control<T>`      | The `control` object from `useForm()`          |
+| name               | `FieldPath<T>`    | The array field's name, type-checked against `T` |
+| label              | string            | Field label                                     |
+| description        | string            | Helper text below the list                      |
+| placeholder        | string            | Placeholder for each item's input (default: `"Enter item"`) |
+| addButtonLabel     | string            | Label for the add-item button (default: `"Add Item"`) |
+| className          | string            | Additional CSS classes on the field wrapper       |
 
 
 ## Resources

@@ -29,7 +29,6 @@ export function FormSelectBasic() {
         control={form.control}
         name="role"
         label="Role"
-        required
         placeholder="Select a role"
         options={[
           { value: "viewer", label: "Viewer" },

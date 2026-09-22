@@ -57,12 +57,12 @@ A repeatable list of text inputs, backed by react-hook-form's [`useFieldArray`](
 
 ### FormArrayField
 
-| Prop            | Type            | Default      | Description                              |
-| :--------------- | :--------------- | :------------ | :-------------------------------------------- |
-| control            | `Control<T>`      |               | The `control` object from `useForm()`          |
-| name               | `FieldPath<T>`    |               | The array field's name, type-checked against `T` |
-| label              | string            |               | Field label; a trailing `*` marks it required  |
-| description        | string            |               | Helper text below the list                      |
-| placeholder        | string            | "Enter item"  | Placeholder for each item's input                |
-| addButtonLabel     | string            | "Add Item"    | Label for the add-item button                    |
-| className          | string            |               | Additional CSS classes on the field wrapper       |
+| Prop            | Type            | Description                              |
+| :--------------- | :--------------- | :-------------------------------------------- |
+| control            | `Control<T>`      | The `control` object from `useForm()`          |
+| name               | `FieldPath<T>`    | The array field's name, type-checked against `T` |
+| label              | string            | Field label                                     |
+| description        | string            | Helper text below the list                      |
+| placeholder        | string            | Placeholder for each item's input (default: `"Enter item"`) |
+| addButtonLabel     | string            | Label for the add-item button (default: `"Add Item"`) |
+| className          | string            | Additional CSS classes on the field wrapper       |

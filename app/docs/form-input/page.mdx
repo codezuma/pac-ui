@@ -19,8 +19,6 @@ A single-line text input bound to a [form](/docs/form)'s `control`, with a label
   classNameComponentContainer="p-8"
 />
 
-A label ending in `*` renders the asterisk in the destructive color to flag a required field — no extra prop needed.
-
 ## Installation
 
 <Tabs defaultValue="cli">
@@ -59,13 +57,13 @@ A label ending in `*` renders the asterisk in the destructive color to flag a re
 
 ### FormInput
 
-| Prop           | Type                | Default | Description                                    |
-| :------------- | :------------------ | :------ | :---------------------------------------------- |
-| control         | `Control<T>`         |         | The `control` object from `useForm()`            |
-| name            | `FieldPath<T>`       |         | The field name, type-checked against `T`         |
-| label           | string               |         | Field label; a trailing `*` marks it required    |
-| description     | string               |         | Helper text below the input                      |
-| Icon            | React.ReactNode      |         | Leading icon                                     |
-| inputClassName  | string               |         | Additional CSS classes on the `<input>`          |
-| className       | string               |         | Additional CSS classes on the field wrapper       |
-| ...props        | `React.InputHTMLAttributes<HTMLInputElement>` |  | All other native input props (`type`, `placeholder`, ...) |
+| Prop           | Type                | Description                                    |
+| :------------- | :------------------ | :---------------------------------------------- |
+| control         | `Control<T>`         | The `control` object from `useForm()`            |
+| name            | `FieldPath<T>`       | The field name, type-checked against `T`         |
+| label           | string               | Field label                                       |
+| description     | string               | Helper text below the input                      |
+| Icon            | React.ReactNode      | Leading icon                                     |
+| inputClassName  | string               | Additional CSS classes on the `<input>`          |
+| className       | string               | Additional CSS classes on the field wrapper       |
+| ...props        | `React.InputHTMLAttributes<HTMLInputElement>` | All other native input props (`type`, `placeholder`, ...) |

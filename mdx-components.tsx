@@ -75,8 +75,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       className,
       ...props
     }: React.HTMLAttributes<HTMLTableElement>) => (
-      <div className="not-prose border-border relative w-full table-auto overflow-auto rounded-lg border text-sm">
-        <table className={cn("w-full", className)} {...props} />
+      <div className="not-prose border-border relative w-full overflow-auto rounded-lg border text-sm">
+        <table
+          className={cn("mdx-table w-full", className)}
+          {...props}
+        />
       </div>
     ),
     thead: ({
@@ -120,7 +123,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       ...props
     }: React.HTMLAttributes<HTMLTableDataCellElement>) => (
       <td
-        className={cn("px-4 py-2 text-left align-middle", className)}
+        className={cn(
+          "px-4 py-3 text-left align-middle leading-relaxed",
+          className
+        )}
         {...props}
       />
     ),

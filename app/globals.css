@@ -324,3 +324,32 @@ code {
 .dark .shiki span {
   color: var(--shiki-dark);
 }
+
+/* Prop tables (Component API docs): fixed column proportions so the
+   Description column gets real width instead of the table's even column
+   split squeezing it into wrapping every couple of words. overflow-wrap
+   lets long unbroken type signatures (e.g. React.InputHTMLAttributes<...>)
+   wrap inside their column instead of forcing it wide. */
+.mdx-table {
+  table-layout: fixed;
+}
+
+.mdx-table th:nth-child(1),
+.mdx-table td:nth-child(1) {
+  width: 20%;
+}
+
+.mdx-table th:nth-child(2),
+.mdx-table td:nth-child(2) {
+  width: 30%;
+}
+
+.mdx-table th:nth-child(3),
+.mdx-table td:nth-child(3) {
+  width: 50%;
+}
+
+.mdx-table td,
+.mdx-table th {
+  overflow-wrap: anywhere;
+}

@@ -49,12 +49,7 @@ function FormArrayField<
 
   return (
     <Field className={className} data-invalid={!!fieldError}>
-      {label && (
-        <FieldLabel className="flex items-center gap-1">
-          {label.replace(/\s*\*$/, "")}
-          {label.includes("*") && <span className="text-destructive">*</span>}
-        </FieldLabel>
-      )}
+      {label && <FieldLabel>{label}</FieldLabel>}
       <FieldContent>
         <div className="space-y-2">
           {fields.length === 0 ? (

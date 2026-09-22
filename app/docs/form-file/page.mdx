@@ -57,12 +57,12 @@ A drag-and-drop file upload bound to a [form](/docs/form)'s `control`. Supports 
 
 ### FormFileInput
 
-| Prop        | Type            | Default | Description                                    |
-| :----------- | :--------------- | :------ | :-------------------------------------------------- |
-| control       | `Control<T>`      |         | The `control` object from `useForm()`                |
-| name          | `FieldPath<T>`    |         | The field name, type-checked against `T`             |
-| label         | string            |         | Field label                                          |
-| description   | string            |         | Helper text below the drop zone                       |
-| accept        | string            |         | Accepted file extensions/MIME types                   |
-| multiple      | boolean           | false   | Whether more than one file can be selected             |
-| className     | string            |         | Additional CSS classes on the field wrapper            |
+| Prop        | Type            | Description                                    |
+| :----------- | :--------------- | :-------------------------------------------------- |
+| control       | `Control<T>`      | The `control` object from `useForm()`                |
+| name          | `FieldPath<T>`    | The field name, type-checked against `T`             |
+| label         | string            | Field label                                          |
+| description   | string            | Helper text below the drop zone                       |
+| accept        | string            | Accepted file extensions/MIME types                   |
+| multiple      | boolean           | Whether more than one file can be selected (default: `false`) |
+| className     | string            | Additional CSS classes on the field wrapper            |

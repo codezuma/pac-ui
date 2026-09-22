@@ -26,7 +26,6 @@ interface FormSelectProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
   label?: string
-  required?: boolean
   icon?: React.ReactNode
   control: Control<TFieldValues>
   name: TName
@@ -49,7 +48,6 @@ function FormSelect<
   className,
   disabled,
   icon,
-  required,
   formItemClassName,
 }: FormSelectProps<TFieldValues, TName>) {
   return (
@@ -67,7 +65,7 @@ function FormSelect<
               className="flex items-center gap-2 text-sm font-semibold"
             >
               {icon}
-              {label} {required && <span className="text-destructive">*</span>}
+              {label}
             </FieldLabel>
           )}
 

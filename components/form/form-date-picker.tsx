@@ -104,8 +104,13 @@ function FormDatePicker<
                 />
                 <PopoverTrigger
                   render={
-                    <InputGroupButton variant="ghost" size="xs" type="button">
-                      <CalendarIcon className="size-6!" />
+                    <InputGroupButton
+                      variant="ghost"
+                      size="icon-xs"
+                      type="button"
+                      aria-label="Open calendar"
+                    >
+                      <CalendarIcon className="size-4" />
                     </InputGroupButton>
                   }
                 />

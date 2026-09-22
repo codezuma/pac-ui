@@ -71,18 +71,22 @@ function FormPassword<
                 type={inputType}
                 className={inputClassName}
               />
-              <InputGroupButton
-                onClick={toggleType}
-                type="button"
-                variant="ghost"
-                size="xs"
-              >
-                {inputType === "text" ? (
-                  <Eye className="text-muted-foreground size-5" />
-                ) : (
-                  <EyeOff className="text-muted-foreground size-5" />
-                )}
-              </InputGroupButton>
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  onClick={toggleType}
+                  type="button"
+                  variant="ghost"
+                  size="icon-xs"
+                  aria-label={inputType === "password" ? "Show password" : "Hide password"}
+                  aria-pressed={inputType === "text"}
+                >
+                  {inputType === "text" ? (
+                    <Eye className="text-muted-foreground size-4" />
+                  ) : (
+                    <EyeOff className="text-muted-foreground size-4" />
+                  )}
+                </InputGroupButton>
+              </InputGroupAddon>
             </InputGroup>
           </FieldContent>
           {description && <FieldDescription>{description}</FieldDescription>}

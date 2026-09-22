@@ -65,14 +65,7 @@ function FormNumberField<
 
         return (
           <Field className={className} data-invalid={fieldState.invalid}>
-            {label && (
-              <FieldLabel className="flex items-center gap-1">
-                {label.replace(/\s*\*$/, "")}
-                {label.includes("*") && (
-                  <span className="text-destructive">*</span>
-                )}
-              </FieldLabel>
-            )}
+            {label && <FieldLabel>{label}</FieldLabel>}
             <FieldContent>
               {Icon ? (
                 <InputGroup aria-invalid={!!fieldState.error}>

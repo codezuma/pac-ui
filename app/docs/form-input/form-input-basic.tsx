@@ -32,7 +32,7 @@ export function FormInputBasic() {
       <FormInput
         control={form.control}
         name="username"
-        label="Username *"
+        label="Username"
         placeholder="your-username"
         description="This is your public display name."
         Icon={<User className="size-4" />}

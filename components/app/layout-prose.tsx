@@ -11,7 +11,7 @@ export function LayoutProse({ children, className }: LayoutProseProps) {
       className={cn(
         "prose prose-zinc dark:prose-invert prose-h1:scroll-m-20",
         "prose-h1:text-2xl prose-h1:font-semibold prose-h2:mt-12 prose-h2:scroll-m-20 prose-h2:text-xl prose-h2:font-medium prose-h3:scroll-m-20 prose-h3:text-base prose-h3:font-medium prose-h4:scroll-m-20 prose-h4:text-base prose-h4:font-medium prose-h5:scroll-m-20 prose-h5:text-sm prose-h6:scroll-m-20 prose-h6:text-xs prose-strong:font-medium",
-        "[&_:not(pre)>code]:rounded-md [&_:not(pre)>code]:bg-gray-100 [&_:not(pre)>code]:p-1 [&_:not(pre)>code]:text-gray-800 prose-table:block prose-table:overflow-y-auto prose-img:m-0 mr-0 max-w-full min-w-0 flex-1",
+        "[&_:not(pre)>code]:rounded-md [&_:not(pre)>code]:bg-secondary [&_:not(pre)>code]:p-1 [&_:not(pre)>code]:text-secondary-foreground prose-table:block prose-table:overflow-x-auto prose-img:m-0 mr-0 max-w-full min-w-0 flex-1",
         "[&_.ch-code_code]:bg-primary-foreground",
         className
       )}

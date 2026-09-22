@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { FormPassword } from "@/components/form/form-password"
 import { FormProvider } from "@/components/form/form-provider"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Lock } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -30,6 +31,7 @@ export function FormPasswordBasic() {
         name="password"
         label="Password"
         description="Must be at least 8 characters."
+        Icon={<Lock className="size-4" />}
       />
       <Button type="submit">Continue</Button>
     </FormProvider>

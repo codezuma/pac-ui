@@ -136,9 +136,9 @@ const form = useForm<LoginFormValues>({ resolver: zodResolver(schema) })
 
 ### FormProvider
 
-| Prop      | Type                     | Default | Description                                         |
-| :-------- | :----------------------- | :------ | :--------------------------------------------------- |
-| methods   | `UseFormReturn<T>`       |         | The object returned by react-hook-form's `useForm()` |
-| onSubmit  | `() => void`             |         | Called with the validated values on submit           |
-| className | string                   |         | Additional CSS classes on the `<form>` element        |
-| children  | React.ReactNode          |         | The form's fields                                     |
+| Prop      | Type                     | Description                                         |
+| :-------- | :----------------------- | :--------------------------------------------------- |
+| methods   | `UseFormReturn<T>`       | The object returned by react-hook-form's `useForm()` |
+| onSubmit  | `() => void`             | Called with the validated values on submit           |
+| className | string                   | Additional CSS classes on the `<form>` element        |
+| children  | React.ReactNode          | The form's fields                                     |
