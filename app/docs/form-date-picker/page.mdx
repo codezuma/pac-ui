@@ -1,0 +1,74 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormDatePickerBasic } from "./form-date-picker-basic"
+
+export const metadata = generateMetadata(
+  "Form Date Picker",
+  "A date input with a calendar popover, bound to react-hook-form, with automatic error display."
+)
+
+# Form Date Picker
+
+A text input for `YYYY-MM-DD` dates with a calendar popover, bound to a [form](/docs/form)'s `control`. Pasted `dd-mm-yyyy` or `dd/mm/yyyy` values are reformatted automatically.
+
+## Example
+
+<ComponentCodePreview
+  component={<FormDatePickerBasic />}
+  filePath="app/docs/form-date-picker/form-date-picker-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-date-picker.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependencies.</Step>
+
+<CodeBlock code={`npm install react-day-picker dayjs`} language="bash" />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-date-picker.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormDatePicker
+
+| Prop            | Type            | Default | Description                                   |
+| :--------------- | :--------------- | :------ | :------------------------------------------------ |
+| control           | `Control<T>`      |         | The `control` object from `useForm()`              |
+| name              | `FieldPath<T>`    |         | The field name, type-checked against `T`           |
+| label             | string            |         | Field label                                        |
+| description       | string            |         | Helper text below the input                        |
+| placeholder       | string            |         | Placeholder text                                    |
+| fromDate          | Date              |         | Earliest selectable date                            |
+| toDate            | Date              |         | Latest selectable date                              |
+| inputClassName    | string            |         | Additional CSS classes on the `<input>`             |
+| className         | string            |         | Additional CSS classes on the field wrapper          |

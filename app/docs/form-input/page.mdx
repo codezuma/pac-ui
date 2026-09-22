@@ -1,0 +1,71 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormInputBasic } from "./form-input-basic"
+
+export const metadata = generateMetadata(
+  "Form Input",
+  "A single-line text input bound to react-hook-form, with a label, description, and automatic error display."
+)
+
+# Form Input
+
+A single-line text input bound to a [form](/docs/form)'s `control`, with a label, description, leading icon, and automatic Zod error display.
+
+## Example
+
+<ComponentCodePreview
+  component={<FormInputBasic />}
+  filePath="app/docs/form-input/form-input-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+A label ending in `*` renders the asterisk in the destructive color to flag a required field — no extra prop needed.
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-input.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-input.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormInput
+
+| Prop           | Type                | Default | Description                                    |
+| :------------- | :------------------ | :------ | :---------------------------------------------- |
+| control         | `Control<T>`         |         | The `control` object from `useForm()`            |
+| name            | `FieldPath<T>`       |         | The field name, type-checked against `T`         |
+| label           | string               |         | Field label; a trailing `*` marks it required    |
+| description     | string               |         | Helper text below the input                      |
+| Icon            | React.ReactNode      |         | Leading icon                                     |
+| inputClassName  | string               |         | Additional CSS classes on the `<input>`          |
+| className       | string               |         | Additional CSS classes on the field wrapper       |
+| ...props        | `React.InputHTMLAttributes<HTMLInputElement>` |  | All other native input props (`type`, `placeholder`, ...) |

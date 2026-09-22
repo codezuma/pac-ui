@@ -1,0 +1,29 @@
+import { generateMetadata } from "../utils/metadata"
+
+export const metadata = generateMetadata(
+  "Attribution",
+  "Pac UI's origins, and a thank-you to the prompt-kit project it grew out of."
+)
+
+# Attribution
+
+**Pac UI** started as a fork of [**prompt-kit**](https://github.com/ibelick/prompt-kit), the excellent AI chat component library built by [Julien Thibeaut](https://twitter.com/ibelick). The overall site layout, docs structure, and general project scaffolding you see here trace directly back to prompt-kit — we're grateful for that foundation and want to be upfront about it.
+
+## What came from prompt-kit
+
+- The site layout, navigation, and docs structure.
+- The overall project scaffolding (build tooling, MDX docs setup, registry pattern).
+- The general approach of "copy the component into your project, own the code" popularized by prompt-kit and shadcn/ui.
+
+## What's original to Pac UI
+
+- Every component in this library — the `FormProvider` and all `Form*` field components — is original work, written from scratch for type-safe forms. None of it is copied from prompt-kit.
+- Pac UI solves a different problem entirely: prompt-kit is built for AI chat interfaces, while Pac UI is built for validated, type-safe forms on top of react-hook-form and Zod.
+
+## Thank you
+
+Huge thanks to Julien Thibeaut and everyone who has contributed to prompt-kit. It's a fantastic project, and Pac UI wouldn't look the way it does without it. If you're building an AI chat interface, go check out [prompt-kit](https://github.com/ibelick/prompt-kit) — it's a great library and deserves the support.
+
+Pac UI is maintained by Chandresh Patidar, who joined as a new contributor to build out the form-focused component set on top of the prompt-kit foundation.
+
+Both projects are MIT licensed. See the `LICENCE.md` file in the repository for the full copyright notice.

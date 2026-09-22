@@ -1,0 +1,71 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormSelectBasic } from "./form-select-basic"
+
+export const metadata = generateMetadata(
+  "Form Select",
+  "A single-choice dropdown bound to react-hook-form, with automatic error display."
+)
+
+# Form Select
+
+A single-choice dropdown bound to a [form](/docs/form)'s `control`, backed by [Select](/docs/form-select).
+
+## Example
+
+<ComponentCodePreview
+  component={<FormSelectBasic />}
+  filePath="app/docs/form-select/form-select-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-select.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-select.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormSelect
+
+| Prop              | Type                                       | Default | Description                              |
+| :----------------- | :------------------------------------------ | :------ | :------------------------------------------ |
+| control             | `Control<T>`                                |         | The `control` object from `useForm()`        |
+| name                | `FieldPath<T>`                              |         | The field name, type-checked against `T`     |
+| label               | string                                       |         | Field label                                  |
+| required            | boolean                                      |         | Shows a destructive-colored asterisk          |
+| icon                | React.ReactNode                              |         | Icon rendered next to the label               |
+| placeholder         | string                                       |         | Placeholder shown when no option is selected  |
+| options             | `{ value: string; label: React.ReactNode }[]` |         | The selectable options                        |
+| disabled            | boolean                                      |         | Disables the select                           |
+| className           | string                                       |         | Additional CSS classes on the trigger          |
+| formItemClassName   | string                                       |         | Additional CSS classes on the field wrapper    |

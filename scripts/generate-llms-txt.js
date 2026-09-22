@@ -15,8 +15,6 @@ const stat = promisify(_stat)
 
 // Configuration
 const DOCS_DIR = join(process.cwd(), "app", "docs")
-const BLOCKS_FILE = join(process.cwd(), "app", "blocks", "page.tsx")
-const PRIMITIVES_FILE = join(process.cwd(), "scripts", "registry-primitives.ts")
 const OUTPUT_FILE_FULL = join(process.cwd(), "llms-full.txt")
 const OUTPUT_FILE_SHORT = join(process.cwd(), "llms.txt")
 const COMPONENTS_FILE = join(process.cwd(), "scripts", "registry-components.ts")
@@ -25,21 +23,19 @@ const COMPONENTS_FILE = join(process.cwd(), "scripts", "registry-components.ts")
 const COMPONENT_ORDER = [
   "introduction",
   "installation",
-  "prompt-input",
-  "code-block",
-  "markdown",
-  "message",
-  "chat-container",
-  "scroll-button",
-  "loader",
-  "prompt-suggestion",
-  "response-stream",
-  "reasoning",
-  "file-upload",
-  "jsx-preview",
-  "tool",
-  "source",
-  "showcase",
+  "attribution",
+  "form",
+  "form-input",
+  "form-password",
+  "form-textarea",
+  "form-select",
+  "form-checkbox",
+  "form-switch",
+  "form-date-picker",
+  "form-number-field",
+  "form-phone-number",
+  "form-file",
+  "form-array-field",
 ]
 
 /**
@@ -99,7 +95,7 @@ async function processComponentDocs(componentName) {
       return formatEmptyComponentSection(componentName)
     }
 
-    return formatComponentSection(componentName, fullMdxContent)
+    return formatComponentSection(fullMdxContent)
   } catch (error) {
     console.error(`Error processing ${componentName}:`, error)
     return ""
@@ -109,21 +105,7 @@ async function processComponentDocs(componentName) {
 /**
  * Format the component section with the full MDX content
  */
-function formatComponentSection(componentName, mdxContent) {
-  // For showcase, provide a simpler format
-  if (componentName === "showcase") {
-    return `## Showcase
-
-Check out these example implementations using prompt-kit components:
-
-- [zola.chat](https://zola.chat/): Open-source AI chat app built with prompt-kit components
-
-${mdxContent}
-
-`
-  }
-
-  // For regular components, return the full MDX content
+function formatComponentSection(mdxContent) {
   return mdxContent + "\n\n"
 }
 
@@ -137,7 +119,7 @@ function formatEmptyComponentSection(componentName) {
 
   return `## ${formattedName}
 
-**Path**: \`components/prompt-kit/${componentName}.tsx\`
+**Path**: \`components/form/${componentName}.tsx\`
 
 **Features**:
 - Customizable styling
@@ -160,7 +142,8 @@ async function generateTableOfContents() {
 
   // Add component subsections
   const componentSections = COMPONENT_ORDER.filter(
-    (section) => !["introduction", "installation", "showcase"].includes(section)
+    (section) =>
+      !["introduction", "installation", "attribution"].includes(section)
   )
 
   componentSections.forEach((component) => {
@@ -169,9 +152,7 @@ async function generateTableOfContents() {
     toc += `  - [${formattedName}](#${component})\n`
   })
 
-  toc += `- [Blocks](#blocks)\n`
-  toc += `- [Primitives](#primitives)\n`
-  toc += `- [Showcase](#showcase)\n\n`
+  toc += `\n`
 
   return toc
 }
@@ -180,139 +161,13 @@ async function generateTableOfContents() {
  * Generate main header section including title and description
  */
 function generateHeaderSection() {
-  return `# prompt-kit
+  return `# Pac UI
 
-> prompt-kit is a library of customizable, high-quality UI components for AI applications. It provides ready-to-use components for building chat experiences, AI agents, autonomous assistants, and more, with a focus on rapid development and beautiful design.
+> Pac UI is a set of type-safe, customizable form components for React, built on react-hook-form and Zod. A FormProvider and a small family of Form* field components handle validation, error display, and accessibility for you.
 
-prompt-kit is built on top of shadcn/ui and extends it with specialized components for AI interfaces. It uses Next.js, React 19, and Tailwind CSS. The components are designed to be easily customizable and can be installed individually using the shadcn CLI.
-
-`
-}
-
-/**
- * Generate blocks section
- */
-async function generateBlocksSection() {
-  console.log("Generating blocks section...")
-  try {
-    if (!existsSync(BLOCKS_FILE)) {
-      console.warn(`Blocks file not found at ${BLOCKS_FILE}`)
-      return ""
-    }
-
-    const blocksContent = await readFile(BLOCKS_FILE, "utf8")
-
-    // Extract block titles from h4 tags
-    const blockTitlesRegex = /<h4>(.*?)<\/h4>/g
-    let match
-    const blockTitles = []
-
-    while ((match = blockTitlesRegex.exec(blocksContent)) !== null) {
-      blockTitles.push(match[1])
-    }
-
-    console.log(`Found ${blockTitles.length} blocks: ${blockTitles.join(", ")}`)
-
-    // Generate blocks section
-    let blocksSection = `## Blocks
-
-Building blocks for AI apps. Clean, composable blocks built with shadcn/ui and prompt-kit. Use them to ship faster, works with any React framework.
-
-Available blocks:
+Pac UI is built on top of shadcn/ui with the same design principles: copy the components into your project, own the code, and customize freely. It uses Next.js, React, and Tailwind CSS. Components are installed individually using the shadcn CLI.
 
 `
-
-    blockTitles.forEach((title) => {
-      const filename = title.toLowerCase().replace(/\s+/g, "-")
-      blocksSection += `- **${title}**: \`components/blocks/${filename}.tsx\`\n`
-    })
-
-    blocksSection += `\nAll blocks are available at [prompt-kit.com/blocks](https://www.prompt-kit.com/blocks).\n\n`
-
-    return blocksSection
-  } catch (error) {
-    console.error("Error generating blocks section:", error)
-    return ""
-  }
-}
-
-/**
- * Generate primitives section
- */
-async function generatePrimitivesSection() {
-  console.log("Generating primitives section...")
-  try {
-    if (!existsSync(PRIMITIVES_FILE)) {
-      console.warn(`Primitives file not found at ${PRIMITIVES_FILE}`)
-      return ""
-    }
-
-    const primitivesContent = await readFile(PRIMITIVES_FILE, "utf8")
-
-    // Parse the primitives array from the TypeScript file
-    const primitivesMatch = primitivesContent.match(
-      /export const primitives = \[(.*?)\]/s
-    )
-    if (!primitivesMatch) {
-      console.warn("Could not find primitives array in registry-primitives.ts")
-      return ""
-    }
-
-    // Extract primitive objects using regex
-    const primitiveObjectsRegex =
-      /{\s*name:\s*"([^"]+)",\s*type:\s*"[^"]+",\s*title:\s*"([^"]+)",\s*description:\s*"([^"]+)"/g
-    const primitives = []
-    let match
-
-    while ((match = primitiveObjectsRegex.exec(primitivesContent)) !== null) {
-      primitives.push({
-        name: match[1],
-        title: match[2],
-        description: match[3],
-      })
-    }
-
-    console.log(
-      `Found ${primitives.length} primitives: ${primitives.map((p) => p.name).join(", ")}`
-    )
-
-    // Generate primitives section
-    let primitivesSection = `## Primitives
-
-Ready-to-use primitives for AI applications. These are complete, production-ready components that you can install and use immediately in your projects. They include both frontend components and backend API routes.
-
-Available primitives:
-
-`
-
-    primitives.forEach((primitive) => {
-      primitivesSection += `### ${primitive.title}
-
-**Name**: \`${primitive.name}\`  
-**Description**: ${primitive.description}
-
-**Installation**:
-\`\`\`bash
-npx shadcn add "https://prompt-kit.com/c/${primitive.name}.json"
-\`\`\`
-
-**Features**:
-- Complete frontend and backend implementation
-- Built with prompt-kit components
-- shadcn/ui compatible
-- Type-safe with TypeScript
-- Production ready
-
-`
-    })
-
-    primitivesSection += `All primitives are available as registry items that can be installed via the shadcn CLI. Each primitive includes both the React component and any necessary API routes.\n\n`
-
-    return primitivesSection
-  } catch (error) {
-    console.error("Error generating primitives section:", error)
-    return ""
-  }
 }
 
 /**
@@ -321,12 +176,12 @@ npx shadcn add "https://prompt-kit.com/c/${primitive.name}.json"
 function generateResourcesSection() {
   return `## Resources
 
-- [GitHub Repository](https://github.com/ibelick/prompt-kit): Source code and issues
-- [Installation Guide](https://www.prompt-kit.com/docs/installation): Detailed installation instructions
-- [Component Documentation](https://www.prompt-kit.com/docs): Complete component API documentation
-- [Blocks](https://www.prompt-kit.com/blocks): Building blocks for AI apps
-- [Primitives](https://www.prompt-kit.com/primitives): Ready-to-use AI primitives
+- [GitHub Repository](https://github.com/codezuma/pac-ui): Source code and issues
+- [Installation Guide](https://pac.chandresh.dev/docs/installation): Detailed installation instructions
+- [Component Documentation](https://pac.chandresh.dev/docs): Complete component API documentation
 - [shadcn/ui Documentation](https://ui.shadcn.com): Documentation for the underlying UI component system
+- [React Hook Form Documentation](https://react-hook-form.com): Documentation for the form state library Pac UI is built on
+- [Zod Documentation](https://zod.dev): Documentation for the schema validation library Pac UI is built on
 - [Next.js Documentation](https://nextjs.org/docs): Documentation for the Next.js framework
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs): Documentation for the Tailwind CSS framework
 `
@@ -369,56 +224,12 @@ async function generateShortComponentsList() {
     components.forEach((component) => {
       // Extract just the filename from the path
       const filename = component.path.split("/").pop() || component.path
-      componentsList += `- [components/prompt-kit/${filename}](https://github.com/ibelick/prompt-kit/blob/main/components/prompt-kit/${filename}): ${component.description}\n`
+      componentsList += `- [components/form/${filename}](https://github.com/codezuma/pac-ui/blob/main/components/form/${filename}): ${component.description}\n`
     })
 
     return componentsList + "\n"
   } catch (error) {
     console.error("Error generating short components list:", error)
-    return ""
-  }
-}
-
-/**
- * Generate short primitives list for llms.txt
- */
-async function generateShortPrimitivesList() {
-  console.log("Generating short primitives list...")
-  try {
-    if (!existsSync(PRIMITIVES_FILE)) {
-      console.warn(`Primitives file not found at ${PRIMITIVES_FILE}`)
-      return ""
-    }
-
-    const primitivesContent = await readFile(PRIMITIVES_FILE, "utf8")
-
-    // Extract primitive objects using regex
-    const primitiveObjectsRegex =
-      /{\s*name:\s*"([^"]+)",\s*type:\s*"[^"]+",\s*title:\s*"([^"]+)",\s*description:\s*"([^"]+)"/g
-    const primitives = []
-    let match
-
-    while ((match = primitiveObjectsRegex.exec(primitivesContent)) !== null) {
-      primitives.push({
-        name: match[1],
-        title: match[2],
-        description: match[3],
-      })
-    }
-
-    if (primitives.length === 0) {
-      return ""
-    }
-
-    let primitivesList = `## Primitives\n\n`
-
-    primitives.forEach((primitive) => {
-      primitivesList += `- [${primitive.title}](https://www.prompt-kit.com/primitives/${primitive.name}): ${primitive.description}\n`
-    })
-
-    return primitivesList + "\n"
-  } catch (error) {
-    console.error("Error generating short primitives list:", error)
     return ""
   }
 }
@@ -436,28 +247,26 @@ async function generateShortLlmsTxt() {
     // Generate documentation section
     const documentation = `## Documentation
 
-- [README](https://github.com/ibelick/prompt-kit/blob/main/README.md): Installation instructions and basic usage guide
-- [Installation](https://www.prompt-kit.com/docs/installation): Detailed installation guide, how to install prompt-kit components
+- [README](https://github.com/codezuma/pac-ui/blob/main/README.md): Installation instructions and basic usage guide
+- [Installation](https://pac.chandresh.dev/docs/installation): Detailed installation guide, how to install Pac UI components
 
 `
 
     // Generate components list
     const componentsList = await generateShortComponentsList()
 
-    // Generate primitives list
-    const primitivesList = await generateShortPrimitivesList()
-
     // Generate optional resources
     const optionalResources = `## Optional
 
-- [zola.chat](https://zola.chat/): Open-source AI chat app built with prompt-kit components, providing a great example implementation
 - [shadcn/ui Documentation](https://ui.shadcn.com): Documentation for the underlying UI component system
+- [React Hook Form Documentation](https://react-hook-form.com): Documentation for the form state library Pac UI is built on
+- [Zod Documentation](https://zod.dev): Documentation for the schema validation library Pac UI is built on
 - [Next.js Documentation](https://nextjs.org/docs): Documentation for the Next.js framework
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs): Documentation for the Tailwind CSS framework 
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs): Documentation for the Tailwind CSS framework
 `
 
     // Combine all sections
-    const shortContent = `${header}${documentation}${componentsList}${primitivesList}${optionalResources}`
+    const shortContent = `${header}${documentation}${componentsList}${optionalResources}`
 
     // Write to file
     await writeFile(OUTPUT_FILE_SHORT, shortContent)
@@ -484,14 +293,6 @@ async function generateFullLlmsTxt() {
     const tableOfContents = await generateTableOfContents()
     console.log("Table of contents generated")
 
-    // Generate blocks section
-    const blocksSection = await generateBlocksSection()
-    console.log("Blocks section generated")
-
-    // Generate primitives section
-    const primitivesSection = await generatePrimitivesSection()
-    console.log("Primitives section generated")
-
     // Generate component sections
     let componentsContent = "## Components\n\n"
 
@@ -507,7 +308,7 @@ async function generateFullLlmsTxt() {
     console.log("Resources section generated")
 
     // Combine all sections
-    const fullContent = `${header}${tableOfContents}${componentsContent}${blocksSection}${primitivesSection}${resources}`
+    const fullContent = `${header}${tableOfContents}${componentsContent}${resources}`
 
     // Write to file
     await writeFile(OUTPUT_FILE_FULL, fullContent)

@@ -1,0 +1,22 @@
+{
+  "name": "form-provider",
+  "type": "registry:ui",
+  "registryDependencies": [],
+  "dependencies": [
+    "react-hook-form"
+  ],
+  "devDependencies": [],
+  "tailwind": {},
+  "cssVars": {
+    "light": {},
+    "dark": {}
+  },
+  "description": "A thin wrapper around react-hook-form's FormProvider that wires up the <form> element and its onSubmit handler.",
+  "files": [
+    {
+      "path": "form-provider.tsx",
+      "content": "\"use client\"\n\nimport { cn } from \"@/lib/utils\"\nimport {\n  forwardRef,\n  useImperativeHandle,\n  useRef,\n  type ReactNode,\n} from \"react\"\nimport {\n  FormProvider as Form,\n  type FieldValues,\n  type UseFormReturn,\n} from \"react-hook-form\"\n\ntype Props<T extends FieldValues> = {\n  children: ReactNode\n  methods: UseFormReturn<T>\n  className?: string\n  onSubmit: () => void\n}\n\n// forwardRef doesn't support generics, so the exported component is typed\n// generically below via a cast; this internal signature stays untyped.\n// eslint-disable-next-line @typescript-eslint/no-explicit-any\nconst FormProvider = forwardRef<HTMLFormElement, Props<any>>(\n  ({ children, onSubmit, className, methods }, ref) => {\n    const formRef = useRef<HTMLFormElement>(null)\n\n    useImperativeHandle(ref, () => formRef.current!)\n\n    return (\n      <Form {...methods}>\n        <form\n          ref={formRef}\n          onSubmit={methods.handleSubmit(onSubmit)}\n          className={cn(className)}\n        >\n          {children}\n        </form>\n      </Form>\n    )\n  }\n)\n\nFormProvider.displayName = \"FormProvider\"\n\nexport { FormProvider }\n",
+      "type": "registry:ui"
+    }
+  ]
+}

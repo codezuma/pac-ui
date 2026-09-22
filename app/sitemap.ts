@@ -1,33 +1,12 @@
 import fs from "fs"
 import path from "path"
 import type { MetadataRoute } from "next"
-import { slugs } from "./[slug]/data"
 
 const BASE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://prompt-kit.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://pac.chandresh.dev"
 ).replace(/\/+$/, "")
 
-const staticRoutes = ["", "docs", "docs/showcase", "blocks", "primitives"]
-
-const componentRouteSources = [
-  { prefix: "c", dir: "blocks" },
-  { prefix: "demo", dir: "demo" },
-  { prefix: "p", dir: "primitives" },
-]
-
-function getComponentSlugs(dirName: string) {
-  const componentsDir = path.join(process.cwd(), "components", dirName)
-
-  if (!fs.existsSync(componentsDir)) {
-    return []
-  }
-
-  return fs
-    .readdirSync(componentsDir)
-    .filter((file) => file.endsWith(".tsx") || file.endsWith(".jsx"))
-    .map((file) => file.replace(/\.(tsx|jsx)$/, ""))
-    .sort()
-}
+const staticRoutes = ["", "docs"]
 
 function getDocsRoutes() {
   const docsDir = path.join(process.cwd(), "app", "docs")
@@ -75,28 +54,14 @@ function buildUrl(route: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const componentSlugsByPrefix = componentRouteSources.map((source) => ({
-    prefix: source.prefix,
-    slugs: getComponentSlugs(source.dir),
-  }))
   const urls = new Set<string>()
 
   staticRoutes.forEach((route) => {
     urls.add(buildUrl(route))
   })
 
-  slugs.forEach((slug) => {
-    urls.add(buildUrl(slug))
-  })
-
   getDocsRoutes().forEach((route) => {
     urls.add(buildUrl(route))
-  })
-
-  componentSlugsByPrefix.forEach(({ prefix, slugs }) => {
-    slugs.forEach((slug) => {
-      urls.add(buildUrl(`${prefix}/${slug}`))
-    })
   })
 
   return Array.from(urls).map((url) => ({ url }))

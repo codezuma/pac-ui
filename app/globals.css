@@ -313,3 +313,14 @@ code {
     content: counter(step);
   }
 }
+
+/* Shiki dual-theme code blocks: colors come in as --shiki-light/--shiki-dark
+   CSS variables (see codeToHtmlDual in lib/shiki.ts) instead of baked-in
+   inline colors, so they can switch with the site's light/dark class. */
+.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki span {
+  color: var(--shiki-dark);
+}

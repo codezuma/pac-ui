@@ -25,6 +25,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://www.prompt-kit.com/sitemap.xml",
+    sitemap: "https://pac.chandresh.dev/sitemap.xml",
   }
 }

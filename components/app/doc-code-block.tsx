@@ -1,4 +1,4 @@
-import { codeToHtml } from "@/lib/shiki"
+import { codeToHtmlDual } from "@/lib/shiki"
 import { ClientCodeWrapper } from "./client-code-wrapper"
 
 type DocCodeBlockProps = {
@@ -12,13 +12,13 @@ export async function DocCodeBlock({
   code,
   ...props
 }: DocCodeBlockProps) {
-  const html = await codeToHtml({ code, lang: language })
+  const html = await codeToHtmlDual({ code, lang: language })
 
   return (
     <ClientCodeWrapper code={code}>
       <div
         dangerouslySetInnerHTML={{ __html: html }}
-        className="not-prose bg-background border-border overflow-auto rounded-md border p-2 text-[13px] dark:[&_pre]:!bg-transparent dark:[&_span]:!text-white"
+        className="not-prose overflow-auto rounded-md border border-border p-4 text-[13px] [&_pre]:m-0 [&_pre]:bg-background"
         {...props}
       />
     </ClientCodeWrapper>

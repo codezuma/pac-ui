@@ -3,7 +3,7 @@ import { generateMetadata } from "./utils/metadata"
 
 export const metadata = generateMetadata(
   "Documentation",
-  "Documentation for prompt-kit"
+  "Documentation for Pac UI"
 )
 
 export default function Docs() {

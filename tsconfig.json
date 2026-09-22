@@ -26,8 +26,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/docs/prompt-input/page.mdx"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

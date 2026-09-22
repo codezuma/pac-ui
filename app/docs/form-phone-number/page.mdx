@@ -1,0 +1,71 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormPhoneNumberBasic } from "./form-phone-number-basic"
+
+export const metadata = generateMetadata(
+  "Form Phone Number",
+  "A phone number input with a country selector, bound to react-hook-form, with automatic error display."
+)
+
+# Form Phone Number
+
+A phone number input with a searchable country selector, bound to a [form](/docs/form)'s `control`.
+
+## Example
+
+<ComponentCodePreview
+  component={<FormPhoneNumberBasic />}
+  filePath="app/docs/form-phone-number/form-phone-number-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-phone-number.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependencies.</Step>
+
+<CodeBlock code={`npm install react-phone-number-input cmdk`} language="bash" />
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-phone-number.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormPhoneNumber
+
+| Prop               | Type            | Default | Description                             |
+| :------------------ | :--------------- | :------ | :------------------------------------------ |
+| control              | `Control<T>`      |         | The `control` object from `useForm()`        |
+| name                 | `FieldPath<T>`    |         | The field name, type-checked against `T`     |
+| label                | string            |         | Field label                                  |
+| placeholder          | string            |         | Placeholder text                             |
+| disabled             | boolean           |         | Disables the input                           |
+| formItemClassName    | string            |         | Additional CSS classes on the field wrapper   |

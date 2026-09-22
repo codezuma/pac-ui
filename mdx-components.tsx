@@ -9,7 +9,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
     code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
-      <code {...props} className="not-prose bg-secondary p-1 font-mono">
+      <code {...props} className="font-mono">
         {children}
       </code>
     ),

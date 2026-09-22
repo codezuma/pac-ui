@@ -1,0 +1,66 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormCheckboxBasic } from "./form-checkbox-basic"
+
+export const metadata = generateMetadata(
+  "Form Checkbox",
+  "A boolean checkbox bound to react-hook-form, with automatic error display."
+)
+
+# Form Checkbox
+
+A single boolean toggle, checkbox style, bound to a [form](/docs/form)'s `control`. Pair it with `z.literal(true, { message })` when the box must be checked to submit.
+
+## Example
+
+<ComponentCodePreview
+  component={<FormCheckboxBasic />}
+  filePath="app/docs/form-checkbox/form-checkbox-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-checkbox.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-checkbox.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormCheckbox
+
+| Prop      | Type            | Default | Description                             |
+| :-------- | :--------------- | :------ | :----------------------------------------- |
+| control    | `Control<T>`      |         | The `control` object from `useForm()`       |
+| name       | `FieldPath<T>`    |         | The field name, type-checked against `T`    |
+| label      | string            |         | Label rendered next to the checkbox          |
+| disabled   | boolean           |         | Disables the checkbox                        |
+| className  | string            |         | Additional CSS classes on the field wrapper   |

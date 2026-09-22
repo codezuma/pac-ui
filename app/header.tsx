@@ -1,6 +1,5 @@
 import { SidebarTrigger } from "@/app/app-sidebar"
 import { useBreakpoint } from "@/hooks/use-breakpoint"
-import { ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 export type HeaderProps = {
@@ -18,21 +17,10 @@ export function Header({ triggerViewportWidth }: HeaderProps) {
     <nav className="absolute top-0 left-0 z-60 w-full px-4 py-4 text-white">
       <div className="text-foreground mx-auto flex max-w-2xl items-center justify-between">
         <Link href="/" className="">
-          <span className="font-[450] lowercase">prompt-kit</span>
+          <span className="font-[450]">Pac UI</span>
         </Link>
         <div className="flex items-center gap-2">
-          {isMobileView ? (
-            <SidebarTrigger />
-          ) : (
-            <a
-              className="border-border inline-flex items-center gap-1 rounded-md border bg-transparent px-2 py-1 text-sm text-black transition-colors hover:bg-zinc-100"
-              href="https://github.com/ibelick/prompt-kit"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub <ExternalLink className="h-3 w-3" />
-            </a>
-          )}
+          <SidebarTrigger />
         </div>
       </div>
     </nav>

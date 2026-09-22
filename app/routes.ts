@@ -2,7 +2,7 @@ export type Route = {
   path: string
   label: string
   order: number
-  type: "component" | "core" | "block" | "primitive"
+  type: "component" | "core"
   isNew?: boolean
 }
 
@@ -26,142 +26,83 @@ export const routes: Route[] = [
     type: "core",
   },
   {
-    path: "/docs/mcp",
-    label: "Model Context Protocol",
+    path: "/docs/attribution",
+    label: "Attribution",
     order: 3,
     type: "core",
   },
-  // Components
+  // Form
   {
-    path: "/docs/chain-of-thought",
-    label: "Chain of Thought",
+    path: "/docs/form",
+    label: "Form",
     order: 4,
     type: "component",
   },
   {
-    path: "/docs/chat-container",
-    label: "Chat Container",
+    path: "/docs/form-input",
+    label: "Form Input",
     order: 5,
     type: "component",
   },
   {
-    path: "/docs/code-block",
-    label: "Code Block",
+    path: "/docs/form-password",
+    label: "Form Password",
     order: 6,
     type: "component",
   },
   {
-    path: "/docs/feedback-bar",
-    label: "Feedback Bar",
-    order: 6,
-    type: "component",
-    isNew: true,
-  },
-  {
-    path: "/docs/file-upload",
-    label: "File Upload",
+    path: "/docs/form-textarea",
+    label: "Form Textarea",
     order: 7,
     type: "component",
   },
   {
-    path: "/docs/image",
-    label: "Image",
+    path: "/docs/form-select",
+    label: "Form Select",
     order: 8,
     type: "component",
   },
   {
-    path: "/docs/loader",
-    label: "Loader",
+    path: "/docs/form-checkbox",
+    label: "Form Checkbox",
     order: 9,
     type: "component",
   },
   {
-    path: "/docs/markdown",
-    label: "Markdown",
+    path: "/docs/form-switch",
+    label: "Form Switch",
     order: 10,
     type: "component",
   },
   {
-    path: "/docs/message",
-    label: "Message",
+    path: "/docs/form-date-picker",
+    label: "Form Date Picker",
     order: 11,
     type: "component",
   },
   {
-    path: "/docs/prompt-input",
-    label: "Prompt Input",
+    path: "/docs/form-number-field",
+    label: "Form Number Field",
     order: 12,
     type: "component",
   },
   {
-    path: "/docs/prompt-suggestion",
-    label: "Prompt Suggestion",
+    path: "/docs/form-phone-number",
+    label: "Form Phone Number",
     order: 13,
     type: "component",
   },
   {
-    path: "/docs/reasoning",
-    label: "Reasoning",
+    path: "/docs/form-file",
+    label: "Form File",
     order: 14,
     type: "component",
   },
   {
-    path: "/docs/scroll-button",
-    label: "Scroll Button",
+    path: "/docs/form-array-field",
+    label: "Form Array Field",
     order: 15,
     type: "component",
-  },
-  {
-    path: "/docs/source",
-    label: "Source",
-    order: 16,
-    type: "component",
-  },
-  {
-    path: "/docs/steps",
-    label: "Steps",
-    order: 17,
-    type: "component",
-  },
-  {
-    path: "/docs/system-message",
-    label: "System Message",
-    order: 18,
-    type: "component",
-  },
-  {
-    path: "/docs/text-shimmer",
-    label: "Text Shimmer",
-    order: 19,
-    type: "component",
-    isNew: true,
-  },
-  {
-    path: "/docs/thinking-bar",
-    label: "Thinking Bar",
-    order: 20,
-    type: "component",
-    isNew: true,
-  },
-  {
-    path: "/docs/tool",
-    label: "Tool",
-    order: 21,
-    type: "component",
-  },
-  // Blocks
-  {
-    path: "/blocks",
-    label: "Blocks",
-    order: 20,
-    type: "block",
-  },
-  // Primitives
-  {
-    path: "/primitives",
-    label: "Primitives",
-    order: 21,
-    type: "primitive",
   },
 ]
 

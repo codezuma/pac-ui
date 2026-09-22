@@ -44,6 +44,33 @@ export const codeToHtml = async ({
   })
 }
 
+// Renders with both themes embedded as CSS variables (--shiki-light / --shiki-dark)
+// instead of baked-in inline colors, so the result can switch with the site's
+// light/dark class without a client re-render.
+export const codeToHtmlDual = async ({
+  code,
+  lang,
+}: {
+  code: string
+  lang: string
+}): Promise<string> => {
+  const highlighterInstance = await getHighlighter()
+
+  if (!highlighterInstance) {
+    throw new Error("Highlighter instance is null")
+  }
+
+  if (!code) {
+    return "<pre><code></code></pre>"
+  }
+
+  return highlighterInstance.codeToHtml(code, {
+    lang: lang,
+    themes: { light: "github-light", dark: "github-dark" },
+    defaultColor: false,
+  })
+}
+
 // Function to dispose of the highlighter when done (e.g., server-side cleanup)
 export const disposeHighlighter = async (): Promise<void> => {
   if (highlighter) {

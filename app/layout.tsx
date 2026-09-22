@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "prompt-kit",
+  title: "Pac UI",
   description:
-    "Core building blocks for AI apps. High-quality, accessible, and customizable components for AI interfaces. Built with React, shadcn/ui and Tailwind CSS.",
+    "A type-safe form system for React. FormProvider and Controller-backed field components built on react-hook-form and Zod, with validation, styling, and accessibility wired in by default.",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://prompt-kit.com"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://pac.chandresh.dev"
   ),
 }
 

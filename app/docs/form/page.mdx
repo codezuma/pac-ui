@@ -1,0 +1,144 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormBasic } from "./form-basic"
+
+export const metadata = generateMetadata(
+  "Form",
+  "FormProvider and the Controller-based field components that make up the Pac UI form system, built on react-hook-form and Zod."
+)
+
+# Form
+
+The form system pairs [react-hook-form](https://react-hook-form.com/) for state management with [Zod](https://zod.dev/) for validation, and wraps both behind a small set of components so you rarely touch either library directly.
+
+## Example
+
+<ComponentCodePreview
+  component={<FormBasic />}
+  filePath="app/docs/form/form-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+## Why a FormProvider?
+
+Without it, every field needs `value`, `onChange`, and an error to be threaded down manually — and every parent in between has to know about props it never uses just to pass them along. That's prop drilling, and it gets worse as a form grows past two or three fields.
+
+`FormProvider` avoids this by wrapping react-hook-form's own `FormProvider` and handing the form's `control` object down through React context instead:
+
+```tsx
+<FormProvider methods={form} onSubmit={form.handleSubmit(onSubmit)}>
+  {/* any Form* field can read `control` from context if you don't pass it explicitly */}
+</FormProvider>
+```
+
+Every `Form*` component (`FormInput`, `FormSelect`, `FormCheckbox`, and so on) binds itself to a single field with react-hook-form's `Controller`, using the `control` and `name` props you give it:
+
+```tsx
+<Controller
+  control={control}
+  name={name}
+  render={({ field, fieldState }) => (
+    // field.value / field.onChange / field.onBlur wire the input;
+    // fieldState.error is whatever Zod produced for this field, if anything
+  )}
+/>
+```
+
+Because `Controller` subscribes only to its own field, adding a tenth field to a form doesn't mean threading ten more props through components that don't care about them — each field component asks react-hook-form for its own slice of state directly.
+
+## Validation and error handling
+
+A Zod schema is the single source of truth for what a form's data should look like:
+
+```tsx
+const schema = z.object({
+  email: z.string().email("Invalid email format"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+})
+
+const form = useForm<z.infer<typeof schema>>({
+  resolver: zodResolver(schema),
+})
+```
+
+`zodResolver` runs that schema on every submit (and, once a field has been touched, on every change) and turns any failure into a `fieldState.error` for the matching field. Every `Form*` component already renders that error through `FieldError` — you don't write `{errors.email && <p>...</p>}` next to each input. If validation passes, `onSubmit` never even runs with bad data.
+
+## Types flow from the schema
+
+`z.infer<typeof schema>` gives you the exact shape of validated data, and that type flows all the way through:
+
+```tsx
+type LoginFormValues = z.infer<typeof schema>
+
+const form = useForm<LoginFormValues>({ resolver: zodResolver(schema) })
+
+<FormInput control={form.control} name="email" />
+```
+
+`FormInput`'s `name` prop is typed as `FieldPath<TFieldValues>` — a union of every valid key path in `LoginFormValues` — so `name="email"` autocompletes and `name="emial"` is a compile error, not a runtime one. Rename a field in the schema and every call site that references the old name stops compiling until you fix it.
+
+## Field components
+
+- [Input](/docs/form-input) — single-line text input
+- [Password](/docs/form-password) — password input with a show/hide toggle
+- [Textarea](/docs/form-textarea) — multi-line text input
+- [Select](/docs/form-select) — single-choice dropdown
+- [Checkbox](/docs/form-checkbox) — single boolean toggle, checkbox style
+- [Switch](/docs/form-switch) — single boolean toggle, switch style
+- [Date Picker](/docs/form-date-picker) — text input with a calendar popover
+- [Number Field](/docs/form-number-field) — numeric input with increment/decrement
+- [Phone Number](/docs/form-phone-number) — phone input with a country selector
+- [File](/docs/form-file) — drag-and-drop file upload
+- [Array Field](/docs/form-array-field) — a repeatable list of inputs
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-provider.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependencies.</Step>
+
+<CodeBlock
+  code={`npm install react-hook-form @hookform/resolvers zod`}
+  language="bash"
+/>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-provider.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormProvider
+
+| Prop      | Type                     | Default | Description                                         |
+| :-------- | :----------------------- | :------ | :--------------------------------------------------- |
+| methods   | `UseFormReturn<T>`       |         | The object returned by react-hook-form's `useForm()` |
+| onSubmit  | `() => void`             |         | Called with the validated values on submit           |
+| className | string                   |         | Additional CSS classes on the `<form>` element        |
+| children  | React.ReactNode          |         | The form's fields                                     |

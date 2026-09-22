@@ -111,13 +111,18 @@ for (const primitive of primitives) {
 }
 
 // Generate consolidated registry.json file in shadcn/ui format
+const repoRoot = path.join(__dirname, "..")
 const componentItems = components.map((component) => {
   // Get file content for each component
   const content = fs.readFileSync(component.path, "utf8")
+  const componentDir = path
+    .relative(repoRoot, path.dirname(component.path))
+    .split(path.sep)
+    .join("/")
 
   const componentFiles = [
     {
-      path: `components/prompt-kit/${path.basename(component.path)}`,
+      path: `${componentDir}/${path.basename(component.path)}`,
       type: "registry:component",
       content,
     },
@@ -127,8 +132,12 @@ const componentItems = components.map((component) => {
   if (component.files && component.files.length > 0) {
     for (const file of component.files) {
       const fileContent = fs.readFileSync(file.path, "utf8")
+      const fileDir = path
+        .relative(repoRoot, path.dirname(file.path))
+        .split(path.sep)
+        .join("/")
       componentFiles.push({
-        path: `components/prompt-kit/${file.name}`,
+        path: `${fileDir}/${file.name}`,
         type: "registry:component",
         content: fileContent,
       })
@@ -149,7 +158,7 @@ const componentItems = components.map((component) => {
     tailwind: component.tailwind,
     cssVars: component.cssVars,
     files: componentFiles,
-    categories: ["ai", "prompt-kit"],
+    categories: ["forms", "react"],
   }
 })
 
@@ -191,7 +200,7 @@ const primitiveItems = primitives.map((primitive) => {
       (primitive as PrimitiveDefinition).registryDependencies || [],
     files: primitiveFiles,
     envVars: primitive.envVars || {},
-    categories: ["ai", "prompt-kit"],
+    categories: ["forms", "react"],
   }
 })
 
@@ -199,8 +208,8 @@ const registryItems = [...componentItems, ...primitiveItems]
 
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
-  name: "prompt-kit",
-  homepage: "https://prompt-kit.com",
+  name: "pac-ui",
+  homepage: "https://pac.chandresh.dev",
   items: registryItems,
 }
 

@@ -1,0 +1,68 @@
+import ComponentCodePreview from "@/components/app/component-code-preview"
+import { generateMetadata } from "../utils/metadata"
+import { FormArrayFieldBasic } from "./form-array-field-basic"
+
+export const metadata = generateMetadata(
+  "Form Array Field",
+  "A repeatable list of inputs bound to react-hook-form's useFieldArray, with automatic error display."
+)
+
+# Form Array Field
+
+A repeatable list of text inputs, backed by react-hook-form's [`useFieldArray`](https://react-hook-form.com/docs/usefieldarray). Unlike the other field components, it manages its own `Controller`-free subscription internally rather than taking a single `name`/`Controller` pair, since it renders a variable number of inputs.
+
+## Example
+
+<ComponentCodePreview
+  component={<FormArrayFieldBasic />}
+  filePath="app/docs/form-array-field/form-array-field-basic.tsx"
+  classNameComponentContainer="p-8"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+<CodeBlock
+  code={`npx shadcn add "https://pac.chandresh.dev/c/form-array-field.json"`}
+  language="bash"
+/>
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<CodeBlock filePath="components/form/form-array-field.tsx" language="tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Component API
+
+### FormArrayField
+
+| Prop            | Type            | Default      | Description                              |
+| :--------------- | :--------------- | :------------ | :-------------------------------------------- |
+| control            | `Control<T>`      |               | The `control` object from `useForm()`          |
+| name               | `FieldPath<T>`    |               | The array field's name, type-checked against `T` |
+| label              | string            |               | Field label; a trailing `*` marks it required  |
+| description        | string            |               | Helper text below the list                      |
+| placeholder        | string            | "Enter item"  | Placeholder for each item's input                |
+| addButtonLabel     | string            | "Add Item"    | Label for the add-item button                    |
+| className          | string            |               | Additional CSS classes on the field wrapper       |

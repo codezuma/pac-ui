@@ -38,12 +38,15 @@ export function CodeRenderer({ code, lang }: CodeRendererProps) {
 
   // SSR fallback: render plain code if not hydrated yet
   return (
-    <div className="not-prose border-border [&_pre]:!bg-background max-h-[650px] overflow-auto overflow-x-auto rounded-md border p-4 text-[13px]">
+    <div className="not-prose max-h-[650px] overflow-auto rounded-md border border-border text-[13px]">
       {highlightedHtml ? (
-        <div dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
+        <div
+          className="[&_pre]:m-0 [&_pre]:bg-background [&_pre]:p-4 [&_code]:text-foreground"
+          dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+        />
       ) : (
-        <pre>
-          <code>{code}</code>
+        <pre className="m-0 bg-background p-4">
+          <code className="text-foreground">{code}</code>
         </pre>
       )}
     </div>

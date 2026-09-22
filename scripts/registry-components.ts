@@ -22,324 +22,233 @@ type ComponentDefinition = Partial<
 
 export const components: ComponentDefinition[] = [
   {
-    name: "prompt-input",
+    name: "form-provider",
     description:
-      "An input field designed for chat interfaces, allowing users to enter and submit text prompts to an AI model",
-    path: path.join(__dirname, "../components/prompt-kit/prompt-input.tsx"),
-    registryDependencies: ["textarea", "tooltip"],
+      "A thin wrapper around react-hook-form's FormProvider that wires up the <form> element and its onSubmit handler.",
+    path: path.join(__dirname, "../components/form/form-provider.tsx"),
+    dependencies: ["react-hook-form"],
   },
   {
-    name: "code-block",
+    name: "form-input",
     description:
-      "A component for displaying code snippets with syntax highlighting and customizable styling",
-    path: path.join(__dirname, "../components/prompt-kit/code-block.tsx"),
-    dependencies: ["shiki"],
+      "A single-line text input bound to react-hook-form via Controller, with a label, description, and automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-input.tsx"),
+    dependencies: ["react-hook-form", "zod", "@hookform/resolvers"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+      {
+        name: "input-group.tsx",
+        path: path.join(__dirname, "../components/ui/input-group.tsx"),
+      },
+    ],
   },
   {
-    name: "markdown",
+    name: "form-password",
     description:
-      "A component for rendering Markdown content with support for code blocks, GFM, and custom styling",
-    path: path.join(__dirname, "../components/prompt-kit/markdown.tsx"),
+      "A password input with a show/hide toggle, bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-password.tsx"),
     dependencies: [
-      "react-markdown",
-      "remark-gfm",
-      "shiki",
-      "marked",
-      "remark-breaks",
+      "react-hook-form",
+      "zod",
+      "@hookform/resolvers",
+      "lucide-react",
     ],
     files: [
       {
-        name: "code-block.tsx",
-        path: path.join(__dirname, "../components/prompt-kit/code-block.tsx"),
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+      {
+        name: "input-group.tsx",
+        path: path.join(__dirname, "../components/ui/input-group.tsx"),
       },
     ],
   },
   {
-    name: "message",
+    name: "form-textarea",
     description:
-      "A component for displaying chat messages with support for avatars, markdown content, and interactive actions",
-    path: path.join(__dirname, "../components/prompt-kit/message.tsx"),
+      "A multi-line text input bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-textarea.tsx"),
+    dependencies: ["react-hook-form", "zod", "@hookform/resolvers"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+      {
+        name: "input-group.tsx",
+        path: path.join(__dirname, "../components/ui/input-group.tsx"),
+      },
+    ],
+  },
+  {
+    name: "form-select",
+    description:
+      "A single-choice dropdown bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-select.tsx"),
+    dependencies: ["react-hook-form", "zod", "@hookform/resolvers"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+      {
+        name: "select.tsx",
+        path: path.join(__dirname, "../components/ui/select.tsx"),
+      },
+    ],
+  },
+  {
+    name: "form-checkbox",
+    description:
+      "A boolean checkbox bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-checkbox.tsx"),
+    dependencies: ["react-hook-form", "zod", "@hookform/resolvers"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+      {
+        name: "checkbox.tsx",
+        path: path.join(__dirname, "../components/ui/checkbox.tsx"),
+      },
+    ],
+  },
+  {
+    name: "form-switch",
+    description:
+      "A boolean switch bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-switch.tsx"),
+    dependencies: ["react-hook-form", "zod", "@hookform/resolvers"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+      {
+        name: "switch.tsx",
+        path: path.join(__dirname, "../components/ui/switch.tsx"),
+      },
+    ],
+  },
+  {
+    name: "form-date-picker",
+    description:
+      "A date input with a calendar popover, bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-date-picker.tsx"),
     dependencies: [
-      "react-markdown",
-      "remark-gfm",
-      "shiki",
-      "marked",
-      "remark-breaks",
+      "react-hook-form",
+      "zod",
+      "@hookform/resolvers",
+      "dayjs",
+      "react-day-picker",
+      "lucide-react",
     ],
-    registryDependencies: ["avatar", "tooltip"],
     files: [
       {
-        name: "markdown.tsx",
-        path: path.join(__dirname, "../components/prompt-kit/markdown.tsx"),
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
       },
       {
-        name: "code-block.tsx",
-        path: path.join(__dirname, "../components/prompt-kit/code-block.tsx"),
+        name: "input-group.tsx",
+        path: path.join(__dirname, "../components/ui/input-group.tsx"),
+      },
+      {
+        name: "popover.tsx",
+        path: path.join(__dirname, "../components/ui/popover.tsx"),
+      },
+      {
+        name: "calendar.tsx",
+        path: path.join(__dirname, "../components/ui/calendar.tsx"),
       },
     ],
   },
   {
-    name: "chat-container",
+    name: "form-number-field",
     description:
-      "A component for creating chat interfaces with intelligent auto-scrolling behavior, designed to provide a smooth and responsive user experience",
-    path: path.join(__dirname, "../components/prompt-kit/chat-container.tsx"),
-    dependencies: ["use-stick-to-bottom"],
-  },
-  {
-    name: "scroll-button",
-    description:
-      "A floating button component that appears when users scroll up in a container, allowing them to quickly return to the bottom of the content",
-    path: path.join(__dirname, "../components/prompt-kit/scroll-button.tsx"),
-    registryDependencies: ["button"],
-    dependencies: ["class-variance-authority", "lucide-react"],
-  },
-  {
-    name: "loader",
-    description:
-      "A component for displaying a loading indicator with multiple variants and customizable styling",
-    path: path.join(__dirname, "../components/prompt-kit/loader.tsx"),
-    registryDependencies: ["button"],
-    tailwind: {
-      config: {
-        theme: {
-          keyframes: {
-            typing: {
-              "0%, 100%": {
-                transform: "translateY(0)",
-                opacity: "0.5",
-              },
-              "50%": {
-                transform: "translateY(-2px)",
-                opacity: "1",
-              },
-            },
-            ["loading-dots"]: {
-              "0%, 100%": {
-                opacity: "0",
-              },
-              "50%": {
-                opacity: "1",
-              },
-            },
-            wave: {
-              "0%, 100%": {
-                transform: "scaleY(1)",
-              },
-              "50%": {
-                transform: "scaleY(0.6)",
-              },
-            },
-            blink: {
-              "0%, 100%": {
-                opacity: "1",
-              },
-              "50%": {
-                opacity: "0",
-              },
-            },
-          },
-          ["text-blink"]: {
-            "0%, 100%": {
-              color: "var(--primary)",
-            },
-            "50%": {
-              color: "var(--muted-foreground)",
-            },
-          },
-          ["bounce-dots"]: {
-            "0%, 100%": {
-              transform: "scale(0.8)",
-              opacity: "0.5",
-            },
-            "50%": {
-              transform: "scale(1.2)",
-              opacity: "1",
-            },
-          },
-          ["thin-pulse"]: {
-            "0%, 100%": {
-              transform: "scale(0.95)",
-              opacity: "0.8",
-            },
-            "50%": {
-              transform: "scale(1.05)",
-              opacity: "0.4",
-            },
-          },
-          ["pulse-dot"]: {
-            "0%, 100%": {
-              transform: "scale(1)",
-              opacity: "0.8",
-            },
-            "50%": {
-              transform: "scale(1.5)",
-              opacity: "1",
-            },
-          },
-          ["shimmer-text"]: {
-            "0%": {
-              backgroundPosition: "150% center",
-            },
-            "100%": {
-              backgroundPosition: "-150% center",
-            },
-          },
-          ["wave-bars"]: {
-            "0%, 100%": {
-              transform: "scaleY(1)",
-              opacity: "0.5",
-            },
-            "50%": {
-              transform: "scaleY(0.6)",
-              opacity: "1",
-            },
-          },
-          ["shimmer"]: {
-            "0%": {
-              backgroundPosition: "200% 50%",
-            },
-            "100%": {
-              backgroundPosition: "-200% 50%",
-            },
-          },
-          ["spinner-fade"]: {
-            "0%": {
-              opacity: "0",
-            },
-            "100%": {
-              opacity: "1",
-            },
-          },
-        },
-      },
-    },
-  },
-  {
-    name: "prompt-suggestion",
-    description:
-      "A component for implementing interactive prompt suggestions in AI interfaces. The PromptSuggestion component offers two distinct modes: Normal Mode and Highlight Mode.",
-    path: path.join(
-      __dirname,
-      "../components/prompt-kit/prompt-suggestion.tsx"
-    ),
-    registryDependencies: ["button"],
-    dependencies: ["class-variance-authority", "lucide-react"],
-  },
-  {
-    name: "response-stream",
-    description:
-      "A component to simulate streaming text on the client side, perfect for fake responses, or any controlled progressive text display.",
-    path: path.join(__dirname, "../components/prompt-kit/response-stream.tsx"),
-  },
-  {
-    name: "reasoning",
-    description: `A collapsible component for showing AI reasoning, explanations, or logic. You can control it manually or let it auto-close when the stream ends. Markdown is supported.`,
-    path: path.join(__dirname, "../components/prompt-kit/reasoning.tsx"),
-    dependencies: ["lucide-react"],
+      "A numeric input with increment/decrement buttons, bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-number-field.tsx"),
+    dependencies: [
+      "react-hook-form",
+      "zod",
+      "@hookform/resolvers",
+      "lucide-react",
+    ],
     files: [
       {
-        name: "markdown.tsx",
-        path: path.join(__dirname, "../components/prompt-kit/markdown.tsx"),
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
       },
       {
-        name: "response-stream.tsx",
-        path: path.join(
-          __dirname,
-          "../components/prompt-kit/response-stream.tsx"
-        ),
+        name: "input-group.tsx",
+        path: path.join(__dirname, "../components/ui/input-group.tsx"),
+      },
+      {
+        name: "number-field.tsx",
+        path: path.join(__dirname, "../components/ui/number-field.tsx"),
       },
     ],
   },
   {
-    name: "file-upload",
+    name: "form-phone-number",
     description:
-      "A component for creating drag-and-drop file upload interfaces with support for single or multiple files, custom triggers, and visual feedback during file dragging operations.",
-    path: path.join(__dirname, "../components/prompt-kit/file-upload.tsx"),
-  },
-  {
-    name: "jsx-preview",
-    description:
-      "A component for rendering JSX strings as React components, with support for streaming content and automatic tag completion.",
-    path: path.join(__dirname, "../components/prompt-kit/jsx-preview.tsx"),
-    dependencies: ["react-jsx-parser"],
-  },
-  {
-    name: "tool",
-    description:
-      "Displays tool call details including input, output, status, and errors. Ideal for visualizing AI tool usage in chat UIs.",
-    path: path.join(__dirname, "../components/prompt-kit/tool.tsx"),
-    dependencies: ["lucide-react"],
-    registryDependencies: ["collapsible", "button"],
-  },
-  {
-    name: "source",
-    description:
-      "Displays website sources used by AI-generated content, showing URL details, titles, and descriptions on hover.",
-    path: path.join(__dirname, "../components/prompt-kit/source.tsx"),
-    registryDependencies: ["hover-card"],
-  },
-  {
-    name: "image",
-    description:
-      "A component for displaying images from base64 or Uint8Array data, with full accessibility and responsive styling. Perfect for AI-generated or user-uploaded images.",
-    path: path.join(__dirname, "../components/prompt-kit/image.tsx"),
-  },
-  {
-    name: "steps",
-    description:
-      "A component for displaying a sequence of operations in a collapsible layout. Each step can include details and an optional vertical bar. Useful for showing AI steps like reasoning traces, tool calls, or process logs.",
-    path: path.join(__dirname, "../components/prompt-kit/steps.tsx"),
-    registryDependencies: ["collapsible"],
-  },
-  {
-    name: "system-message",
-    description:
-      "A banner-style component for surfacing contextual information, warnings, or instructions within AI interfaces.",
-    path: path.join(__dirname, "../components/prompt-kit/system-message.tsx"),
-    registryDependencies: ["button"],
-  },
-  {
-    name: "chain-of-thought",
-    description:
-      "A component for displaying a chain of thought process with collapsible steps and triggers.",
-    path: path.join(__dirname, "../components/prompt-kit/chain-of-thought.tsx"),
-    registryDependencies: ["collapsible"],
-    dependencies: ["lucide-react"],
-  },
-  {
-    name: "text-shimmer",
-    description:
-      "A component for displaying a shimmer effect on text, perfect for loading states or highlighting text.",
-    path: path.join(__dirname, "../components/prompt-kit/text-shimmer.tsx"),
-    tailwind: {
-      config: {
-        theme: {
-          keyframes: {
-            shimmer: {
-              "0%": {
-                backgroundPosition: "200% 50%",
-              },
-              "100%": {
-                backgroundPosition: "-200% 50%",
-              },
-            },
-          },
-        },
+      "A phone number input with a searchable country selector, bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-phone-number.tsx"),
+    dependencies: [
+      "react-hook-form",
+      "zod",
+      "@hookform/resolvers",
+      "react-phone-number-input",
+      "cmdk",
+      "lucide-react",
+    ],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
       },
-    },
+      {
+        name: "phone-input.tsx",
+        path: path.join(__dirname, "../components/ui/phone-input.tsx"),
+      },
+      {
+        name: "command.tsx",
+        path: path.join(__dirname, "../components/ui/command.tsx"),
+      },
+      {
+        name: "popover.tsx",
+        path: path.join(__dirname, "../components/ui/popover.tsx"),
+      },
+    ],
   },
   {
-    name: "thinking-bar",
+    name: "form-file",
     description:
-      "A component to display the thinking state of an AI model with optional actions.",
-    path: path.join(__dirname, "../components/prompt-kit/thinking-bar.tsx"),
-    dependencies: ["lucide-react"],
-    registryDependencies: ["text-shimmer"],
+      "A drag-and-drop file upload bound to react-hook-form via Controller, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-file.tsx"),
+    dependencies: ["react-hook-form", "lucide-react"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+    ],
   },
   {
-    name: "feedback-bar",
-    description: "A component to collect user feedback on AI responses.",
-    path: path.join(__dirname, "../components/prompt-kit/feedback-bar.tsx"),
-    dependencies: ["lucide-react"],
+    name: "form-array-field",
+    description:
+      "A repeatable list of inputs backed by react-hook-form's useFieldArray, with automatic Zod error display.",
+    path: path.join(__dirname, "../components/form/form-array-field.tsx"),
+    dependencies: ["react-hook-form", "lucide-react"],
+    files: [
+      {
+        name: "field.tsx",
+        path: path.join(__dirname, "../components/ui/field.tsx"),
+      },
+    ],
   },
 ]
